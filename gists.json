@@ -1,0 +1,9 @@
+{
+	"description": __DESCRIPTION__,
+	"public": __PUBLIC__,
+	"files": {
+		"autohub.init": {
+			"content": "."
+		}
+	}
+}

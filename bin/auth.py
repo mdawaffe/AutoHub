@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-Parses the JSON respons from https://api.github.com/authorizations
+Parses the JSON response from https://api.github.com/authorizations
 
 Used by install.sh
 """

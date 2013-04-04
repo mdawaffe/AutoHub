@@ -1,0 +1,6 @@
+{
+	"name": __NAME__,
+	"description": __DESCRIPTION__,
+	"private": __PRIVATE__,
+	"team_id": __TEAM__
+}

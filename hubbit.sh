@@ -103,7 +103,7 @@ then
 fi
 
 # Fill in the payload template
-JSON=$( cat "$DIR/payload/hubbit.json" )
+JSON=$( cat "$DIR/payload/repos.json" )
 JSON=${JSON/__NAME__/$NAME}
 JSON=${JSON/__DESCRIPTION__/$DESCRIPTION}
 JSON=${JSON/__ORG__/$ORG}

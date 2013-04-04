@@ -6,7 +6,6 @@ Parses the JSON response from https://api.github.com/gists
 Used by gist.sh
 """
 
-
 import sys
 import json
 

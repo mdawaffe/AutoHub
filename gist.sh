@@ -70,7 +70,7 @@ else
 	BRANCH="$( git branch | grep -F '*' | perl -p -e 's/\*\s*//' )"
 	if [ "master" != "$BRANCH" ]
 	then
-		echo "Please start with in the master branch!" >&2
+		echo "Please start in the master branch!" >&2
 		exit 1
 	fi
 fi

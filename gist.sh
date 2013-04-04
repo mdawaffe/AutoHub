@@ -72,7 +72,7 @@ fi
 
 git remote add origin "$GIST_URL"
 git pull origin master
-git rm autohub.init
+git rm autohub.init > /dev/null
 if [ 1 -eq $IS_GIT ]
 then
 	git reset --hard HEAD~1
@@ -85,4 +85,5 @@ git push origin --force
 GIST_URL=${GIST_URL/#"git@gist.github.com:"/"https://gist.github.com/"}
 GIST_URL=${GIST_URL%".git"}
 
+echo
 echo "Created Gist at $GIST_URL"

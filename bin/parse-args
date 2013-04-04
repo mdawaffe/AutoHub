@@ -3,7 +3,7 @@
 # Helper script to interpret --long-style command line arguments
 
 # #script.sh
-# . $DIR/parse-args a: arg-with-value b arg-with-no-value -- "$@"
+# . /path/to/parse-args a: arg-with-value b arg-with-no-value -- "$@"
 # # Now $@ is parseable via getopts
 
 # $ ./script.sh --arg-with-value "hello" --arg-with-no-value

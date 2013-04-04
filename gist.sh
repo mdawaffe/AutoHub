@@ -2,7 +2,7 @@
 
 DIR="$( cd "$( dirname "$0" )"; pwd )"
 
-. "$DIR"/parse-args d: description p public h help -- "$@"
+. "$DIR"/bin/parse-args d: description p public h help -- "$@"
 
 DESCRIPTION=""
 PUBLIC="false"
@@ -63,7 +63,7 @@ JSON=$( cat "$DIR/payload/gists.json" )
 JSON=${JSON/__DESCRIPTION__/$DESCRIPTION}
 JSON=${JSON/__PUBLIC__/$PUBLIC}
 
-eval "$( echo "$JSON" | curl -s -H "Authorization: BEARER $(git config --global AutoHub.token)" https://api.github.com/gists -X POST -d @- | "$DIR/"gists.py )"
+eval "$( echo "$JSON" | curl -s -H "Authorization: BEARER $(git config --global AutoHub.token)" https://api.github.com/gists -X POST -d @- | "$DIR/"bin/gists.py )"
 if [ 0 -ne $? -o -z "$GIST_URL" ]
 then
 	echo "Gist creation failed :(" >&2

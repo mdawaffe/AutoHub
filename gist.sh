@@ -59,7 +59,7 @@ else
 	PUBLIC="false"
 fi
 
-JSON=$( cat "$DIR/gists.json" )
+JSON=$( cat "$DIR/payload/gists.json" )
 JSON=${JSON/__DESCRIPTION__/$DESCRIPTION}
 JSON=${JSON/__PUBLIC__/$PUBLIC}
 

@@ -1,18 +1,29 @@
 #!/usr/bin/env bash
 
-DESCRIPTION=$1
-PUBLIC=$2
+DIR="$( cd "$( dirname "$0" )"; pwd )"
 
-if [ -z "$DESCRIPTION" ]
-then
-	echo "git gist DESCRIPTION [PUBLIC]" >&2
-	echo "Please enter a Gist description" >&2
-	exit 1
-fi
+. "$DIR"/parse-args d: description p public h help -- "$@"
+
+DESCRIPTION=""
+PUBLIC="false"
+
+while getopts "$GETOPTS_ARGS" arg
+do
+	case "$arg" in
+	d)
+		DESCRIPTION="$OPTARG"
+	;;
+	p)
+		PUBLIC="true"
+	;;
+	h)
+		echo "git gist [--description DESCRIPTION] [--PUBLIC]" >&2
+		exit
+	;;
+	esac
+done
 
 GIST_URL=""
-
-DIR="$( cd "$( dirname "$0" )"; pwd )"
 
 IS_GIT=0
 
@@ -70,3 +81,8 @@ else
 	git commit --amend -m "init"
 fi
 git push origin --force
+
+GIST_URL=${GIST_URL/#"git@gist.github.com:"/"https://gist.github.com/"}
+GIST_URL=${GIST_URL%".git"}
+
+echo "Created Gist at $GIST_URL"

@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Helper script to interpret --long-style command line arguments
+
+# #script.sh
+# . $DIR/parse-args a: arg-with-value b arg-with-no-value -- "$@"
+# # Now $@ is parseable via getopts
+
+# $ ./script.sh --arg-with-value "hello" --arg-with-no-value
+
+GETOPTS_ARGS=""
+
+SHORT_ARGS=()
+LONG_ARGS=()
+
+while [ -n "$1" ]
+do
+	if [ "--" == "$1" ]
+	then
+		shift
+		break;
+	fi
+
+	GETOPTS_ARGS+="$1"
+	SHORT_ARGS+=(${1/:/})
+	shift
+	LONG_ARGS+=($1)
+	shift
+done	
+
+ARGS=()
+
+for arg in "$@"
+do
+	for ((i = 0; i < ${#LONG_ARGS[@]}; i++))
+	do
+		if [ "$arg" == "--${LONG_ARGS[$i]}" ]
+		then
+			arg="-${SHORT_ARGS[$i]}"
+		fi
+	done
+
+	ARGS+=("$arg")
+done
+
+set -- "${ARGS[@]}"

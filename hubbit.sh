@@ -138,8 +138,6 @@ fi
 git remote add "$REMOTE" "$SSH_URL"
 git push "$REMOTE" "$BRANCH"
 
-echo "$REMOTE" "$BRANCH"
-
 # Done
 echo
 echo "Created GitHub Repository:"

@@ -1,35 +1,67 @@
 #!/bin/bash
 
 # Helper script to interpret --long-style command line arguments
+# E.g., `./script.sh --arg-with-value "hello" --arg-with-no-value`
+#
+# Pass to this script:
+# 1. A getopts style option specifier (e.g. "a:" or "b")
+# 2. The corresponding long-style name without the "--" (e.g. "arg-with-value")
+# 3. Repeat 1 and 2 as necessary
+# 4. --
+# 5. The arguments of the calling command
+#
+# Example: the above script.sh would contain the following.
+#
+# . /path/to/parse-args a: arg-with-value b arg-with-no-value -- "$@" # $@ is now parseable via getopts
+#
+# while getopts "$GETOPTS_ARGS" arg
+# do
+# 	case "$arg" in
+#	a)
+#		# do something with "$OPTARG"
+#	;;
+#	b)
+#		# do something
+#	;;
+# 	esac
+# done
 
-# #script.sh
-# . /path/to/parse-args a: arg-with-value b arg-with-no-value -- "$@"
-# # Now $@ is parseable via getopts
-
-# $ ./script.sh --arg-with-value "hello" --arg-with-no-value
-
+# Initialize output
 GETOPTS_ARGS=""
+ARGS=()
 
+# Initialize arg map
 SHORT_ARGS=()
 LONG_ARGS=()
 
+# Loop through positional args looking for "a: long-opt" pairs
 while [ -n "$1" ]
 do
+	# The end, shift off this last argument and leave the rest as $@
 	if [ "--" == "$1" ]
 	then
 		shift
 		break;
 	fi
 
+	# Append the getopts style option specifier
 	GETOPTS_ARGS+="$1"
+
+	# Append the option character (without any colon)
 	SHORT_ARGS+=(${1/:/})
+
+	# The next arg is the long option
 	shift
+
+	# append the long option
 	LONG_ARGS+=($1)
+
+	# next
 	shift
 done	
 
-ARGS=()
-
+# Now loop through what was the input to the calling command
+# and replace any long options with their corresponding short ones
 for arg in "$@"
 do
 	for ((i = 0; i < ${#LONG_ARGS[@]}; i++))
@@ -43,4 +75,4 @@ do
 	ARGS+=("$arg")
 done
 
-set -- "${ARGS[@]}"
+set -- "${ARGS[@]}" # $@ is now parseable via getopts

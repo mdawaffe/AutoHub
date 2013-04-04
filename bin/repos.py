@@ -1,5 +1,11 @@
 #!/usr/bin/env python
 
+"""
+Parses the JSON respons from https://api.github.com/user/repos and https://api.github.com/orgs/:org/repos
+
+Used by hubbit.sh
+"""
+
 import sys
 import json
 

@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+"""
+Parses the JSON respons from https://api.github.com/gists
+
+Used by gist.sh
+"""
+
+
 import sys
 import json
 

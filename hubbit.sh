@@ -80,7 +80,7 @@ then
 	git init
 fi
 
-echo "$SHOW" | egrep '^[\w-]+\s+git@github.com:' &> /dev/null
+echo "$SHOW" | egrep '^[\w.-]+\s+git@github.com:' &> /dev/null
 if [ 0 -eq $? ]
 then
 	echo "Already on GitHub :)" >&2

@@ -11,3 +11,4 @@ exec 3>&-
 git config --global AutoHub.id "$AUTOHUB_ID"
 git config --global AutoHub.token "$AUTOHUB_TOKEN"
 git config --global alias.gist '!'"$DIR"/gist.sh
+git config --global alias.hubbit '!'"$DIR"/hubbit.sh

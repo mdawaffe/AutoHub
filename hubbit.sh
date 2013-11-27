@@ -80,7 +80,7 @@ then
 	git init
 fi
 
-echo "$SHOW" | egrep '^[\w.-]+\s+git@github.com:' &> /dev/null
+echo "$SHOW" | egrep '^[[:alnum:].-]+[[:space:]]+git@github.com:' &> /dev/null
 if [ 0 -eq $? ]
 then
 	echo "Already on GitHub :)" >&2
@@ -91,17 +91,20 @@ BRANCH="$( git branch | grep -F '*' | perl -p -e 's/\*\s*//' )"
 
 if [ -z "$BRANCH" ]
 then
-	ls README README.* &> /dev/null
+	ls [Rr][Ee][Aa][Dd][Mm][Ee].* &> /dev/null
 	if [ 0 -ne $? ]
 	then
-		touch README.md
+		ls [Rr][Ee][Aa][Dd][Mm][Ee] &> /dev/null
+		if [ 0 -ne $? ]
+		then
+			touch README.md
+		fi
 	fi
-	git add README 2> /dev/null
-	git add README.* 2> /dev/null
+	git add [Rr][Ee][Aa][Dd][Mm][Ee] 2> /dev/null
+	git add [Rr][Ee][Aa][Dd][Mm][Ee].* 2> /dev/null
 	git commit -m "readme"
 	BRANCH="$( git branch | grep -F '*' | perl -p -e 's/\*\s*//' )"
 fi
-	
 
 # JSON encode everything
 NAME=$( echo -n "$NAME" | python -c 'import json; import sys; print json.dumps( sys.stdin.read() )' )

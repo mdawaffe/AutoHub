@@ -105,9 +105,10 @@ fi
 
 # Add the new remote
 git remote add "$REMOTE" "$GIT_PUSH_URL"
-
+git fetch
 # Pull the placeholder file so we can delete it
 git pull "$REMOTE" master
+git branch -u "$REMOTE"/master
 
 # Delete the placeholder file
 git rm autohub.init > /dev/null

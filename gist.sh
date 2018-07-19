@@ -106,18 +106,15 @@ fi
 # Add the new remote
 git remote add "$REMOTE" "$GIT_PUSH_URL"
 git fetch
-# Pull the placeholder file so we can delete it
-git pull "$REMOTE" master
-git branch -u "$REMOTE"/master
-
-# Delete the placeholder file
-git rm autohub.init > /dev/null
 
 if [ 1 -eq $IS_GIT ]
 then
-	# Back out to the previous revision (the last "real" one before the placeholder file)
-	git reset --hard HEAD~1
+	git branch -u "$REMOTE"/master
 else
+	git checkout master
+	# Delete the placeholder file
+	git rm autohub.init > /dev/null
+
 	# Add everything and commit as first revision
 	git add '*'
 	git commit --amend -m "init"

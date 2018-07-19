@@ -61,7 +61,7 @@ then
 	git init
 else
 	IS_GIT=1
-	git status | grep 'nothing to commit[[:space:][:punct:]]*working directory clean' &> /dev/null
+	git status | grep 'nothing to commit[[:space:][:punct:]]*working directory clean' &> /dev/null || git status | grep 'nothing to commit[[:space:][:punct:]]*working tree clean' &> /dev/null
 	if [ 0 -ne $? ]
 	then
 		echo "Please start with a clean working directory!" >&2
